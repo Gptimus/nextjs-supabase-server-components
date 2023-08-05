@@ -1,11 +1,8 @@
 import supabase from "@/app/utils/supabase";
 import { notFound } from "next/navigation";
+import RealTimePost from "./realtime-post";
 
-export async function generatedStaticParams() {
-  const { data: posts } = await supabase.from("posts").select("id");
-
-  return posts ?? [];
-}
+export const revalidate = 0;
 
 const Post = async ({ params: { id } }: { params: { id: string } }) => {
   const { data: post } = await supabase
@@ -17,11 +14,7 @@ const Post = async ({ params: { id } }: { params: { id: string } }) => {
   if (!post) {
     notFound();
   }
-  return (
-    <div>
-      <pre>{JSON.stringify(post, null, 2)}</pre>
-    </div>
-  );
+  return <RealTimePost serverPost={post} />;
 };
 
 export default Post;

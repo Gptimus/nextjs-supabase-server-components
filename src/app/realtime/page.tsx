@@ -1,14 +1,12 @@
 import supabase from "@/app/utils/supabase";
+import RealTimePosts from "./realtime-posts";
 
 export const revalidate = 0;
 
 const Posts = async () => {
   const { data: posts, error } = await supabase.from("posts").select();
-  return (
-    <div>
-      <pre>{JSON.stringify(posts, null, 2)}</pre>
-    </div>
-  );
+
+  return <RealTimePosts serverPosts={posts ?? []} />;
 };
 
 export default Posts;

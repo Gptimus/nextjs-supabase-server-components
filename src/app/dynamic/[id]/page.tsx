@@ -1,4 +1,4 @@
-import { supabase } from "@/app/utils/supabase";
+import supabase from "@/app/utils/supabase";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
